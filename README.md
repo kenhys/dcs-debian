@@ -8,6 +8,8 @@ In such a case, I wonder how to fix this issue. How does other packages fix it?
 This is the reason why I've created dcs-debian as thin wrapper of
 Debian Code Search (http://codesearch.debian.net).
 
+![Screenshot of dcs-debian](https://github.com/kenhys/dcs-debian/blob/master/screenshot.png)
+
 ## Installation
 
 Add this line to your application's Gemfile:
