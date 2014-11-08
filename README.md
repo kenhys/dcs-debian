@@ -2,6 +2,12 @@
 
 Dcs-debian is the command line tool which uses Debian Code Search to search debian/ files.
 
+When working on Debian ITP, lintian sometimes reports pile of warnings or errors.
+In such a case, I wonder how to fix this issue. How does other packages fix it?
+
+This is the reason why I've created dcs-debian as thin wrapper of
+Debian Code Search (http://codesearch.debian.net).
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -19,6 +25,17 @@ Or install it yourself as:
     $ gem install dcs-debian
 
 ## Usage
+
+Here is the usage of dcs-debian:
+
+    $ dcs-debian
+    Commands:
+      dcs-debian changelog KEYWORD  #
+      dcs-debian control KEYWORD    #
+      dcs-debian help [COMMAND]     # Describe available commands or one specific command
+      dcs-debian rules KEYWORD      #
+
+Just type specific keyword like this:
 
     $ dcs-debian rules groonga
     $ dcs-debian changelog closed
