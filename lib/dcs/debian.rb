@@ -12,45 +12,33 @@ module Dcs
 
       desc "control KEYWORD", ""
       def control(arg)
-        client = Searcher.new
-        client.pagination("control", arg) do |context|
-          puts sprintf("%s (%s)",
-                       context[:path].bold.white_on_green,
-                       context[:url].white_on_blue)
-          puts context[:pre].gsub(/#{arg}/, '\&'.red_on_yellow)
-        end
+        dcs_search("control", arg)
       end
 
       desc "changelog KEYWORD", ""
       def changelog(arg)
-        client = Searcher.new
-        client.pagination("changelog", arg) do |context|
-          puts sprintf("%s (%s)",
-                       context[:path].bold.white_on_green,
-                       context[:url].white_on_blue)
-          puts context[:pre].gsub(/#{arg}/, '\&'.red_on_yellow)
-        end
+        dcs_search("changelog", arg)
       end
 
       desc "rules KEYWORD", ""
       def rules(arg)
+        dcs_search("rules", arg)
+      end
+
+      private
+
+      def dcs_search(file, keyword)
         client = Searcher.new
-        client.pagination("rules", arg) do |context|
+        client.pagination(file, keyword) do |context|
           puts sprintf("%s (%s)",
                        context[:path].bold.white_on_green,
                        context[:url].white_on_blue)
-          puts context[:pre].gsub(/#{arg}/, '\&'.red_on_yellow)
+          puts context[:pre].gsub(/#{keyword}/, '\&'.red_on_yellow)
         end
       end
 
       def method_missing(id, *arguments)
-        client = Searcher.new
-        client.pagination(id.to_s, arguments[0]) do |context|
-          puts sprintf("%s (%s)",
-                       context[:path].bold.white_on_green,
-                       context[:url].white_on_blue)
-          puts context[:pre].gsub(/#{arguments[0]}/, '\&'.red_on_yellow)
-        end
+        dcs_search(id.to_s, arguments[0])
       end
 
     end
