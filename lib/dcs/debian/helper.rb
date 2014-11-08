@@ -15,14 +15,16 @@ module Dcs
 
         page = 1
         n = 1
-        until next_uri.nil? or page > 10 or n > 10
+        until next_uri.nil? or n > 10 or page > 10
           html = open(next_uri, "r:utf-8").read
           Nokogiri.parse(html) do |doc|
             doc.xpath("//ul[@id='results']/li").each do |li|
               entry = extract_entry(li, target)
               unless entry.empty?
-                n = n + 1
-                yield(entry)
+                if entry[:pre].include?(keyword)
+                  n = n + 1
+                  yield(entry)
+                end
               end
             end
             next_uri = extract_next_page_uri(doc)
