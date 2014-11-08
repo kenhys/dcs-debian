@@ -19,6 +19,13 @@ module Dcs
         end
       end
 
+      desc "changelog [KEYWORDS]", ""
+      def changelog(arg)
+        pagination("changelog", arg) do |context|
+          p context
+        end
+      end
+
     end
   end
 end
