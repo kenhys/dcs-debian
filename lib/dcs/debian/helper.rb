@@ -19,13 +19,12 @@ module Dcs
             doc.xpath("//ul[@id='results']/li").each do |li|
               entry = extract_entry(li, target)
               unless entry.empty?
-                data << entry
+                yield(entry)
               end
             end
             next_uri = extract_next_page_uri(doc)
           end
         end
-        yield(data)
       end
 
       def extract_next_page_uri(node)
