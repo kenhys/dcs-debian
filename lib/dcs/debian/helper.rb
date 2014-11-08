@@ -18,7 +18,7 @@ module Dcs
 
         data = []
         unless next_uri
-          next_uri = sprintf("%s/search?q=%s+path%%3Adebian%%2F%s",
+          next_uri = sprintf("%s/search?q=%s+path%%3Adebian%%2F%s%%24",
                              BASE_URL, keyword, target)
         end
 
@@ -74,9 +74,7 @@ module Dcs
             data = []
             pre.children.each do |cnode|
               if cnode.kind_of?(Nokogiri::XML::Element)
-                case cnode.attribute("name")
-                when "br"
-                when "strong"
+                if cnode.name != "br"
                   data << indent + cnode.text
                 end
               else
@@ -86,8 +84,7 @@ module Dcs
             entry[:pre] = data.join("\n")
           end
         else
-          #p file
-          #p line
+          raise Error
         end
         entry
       end
