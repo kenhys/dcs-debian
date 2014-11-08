@@ -29,7 +29,9 @@ module Dcs
       desc "rules [KEYWORDS]", ""
       def rules(arg)
         pagination("rules", arg) do |context|
-          p context
+          puts sprintf("%s (%s)",
+                       context[:path], context[:url])
+          puts context[:pre]
         end
       end
 

@@ -41,6 +41,7 @@ module Dcs
       end
 
       def extract_entry(node, target)
+        url = BASE_URL + node.xpath("a").attribute("href").text
         raw = node.xpath("a/code").text
         raw =~ /(.+)debian\/(.+):(.+)/
         package = $1
@@ -50,6 +51,7 @@ module Dcs
         case file
         when target
           entry[:path] = raw
+          entry[:url] = url
           entry[:package] = package
           entry[:file] = file
           entry[:line] = line
