@@ -1,8 +1,17 @@
 module Dcs
   module Debian
-    module Helper
+
+    class Searcher
+
+      attr_accessor :page_limit
+      attr_accessor :n_limit
 
       BASE_URL = "http://codesearch.debian.net"
+
+      def initialize
+        @page_limit = 10
+        @n_limit = 10
+      end
 
       def pagination(target, keyword)
         next_uri = nil
@@ -15,7 +24,7 @@ module Dcs
 
         page = 1
         n = 1
-        until next_uri.nil? or n > 10 or page > 10
+        until next_uri.nil? or n > @n_limit or page > @page_limit
           html = open(next_uri, "r:utf-8").read
           Nokogiri.parse(html) do |doc|
             doc.xpath("//ul[@id='results']/li").each do |li|

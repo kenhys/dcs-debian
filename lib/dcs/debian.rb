@@ -11,11 +11,10 @@ module Dcs
 
     class Command < Thor
 
-      include Dcs::Debian::Helper
-
       desc "control [KEYWORDS]", ""
       def control(arg)
-        pagination("control", arg) do |context|
+        client = Searcher.new
+        client.pagination("control", arg) do |context|
           puts sprintf("%s (%s)",
                        context[:path].bold.white_on_green,
                        context[:url].white_on_blue)
@@ -25,7 +24,8 @@ module Dcs
 
       desc "changelog [KEYWORDS]", ""
       def changelog(arg)
-        pagination("changelog", arg) do |context|
+        client = Searcher.new
+        client.pagination("changelog", arg) do |context|
           puts sprintf("%s (%s)",
                        context[:path].bold.white_on_green,
                        context[:url].white_on_blue)
@@ -35,7 +35,8 @@ module Dcs
 
       desc "rules [KEYWORDS]", ""
       def rules(arg)
-        pagination("rules", arg) do |context|
+        client = SearchClient.new
+        client.pagination("rules", arg) do |context|
           puts sprintf("%s (%s)",
                        context[:path].bold.white_on_green,
                        context[:url].white_on_blue)
