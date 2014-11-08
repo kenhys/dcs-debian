@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Dcs::Debian::VERSION
   spec.authors       = ["HAYASHI Kentaro"]
   spec.email         = ["kenhys@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{Command line tool to search debian/ files.}
+  spec.description   = %q{Search keyword from http://codesearch.debian.net by command line.}
   spec.homepage      = ""
   spec.license       = "MIT"
 
