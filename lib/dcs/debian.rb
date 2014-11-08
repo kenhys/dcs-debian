@@ -1,6 +1,7 @@
 require "thor"
 require "open-uri"
 require "nokogiri"
+require "colored"
 require "dcs/debian/version"
 require "dcs/debian/helper"
 
@@ -30,8 +31,9 @@ module Dcs
       def rules(arg)
         pagination("rules", arg) do |context|
           puts sprintf("%s (%s)",
-                       context[:path], context[:url])
-          puts context[:pre]
+                       context[:path].bold.white_on_green,
+                       context[:url].white_on_blue)
+          puts context[:pre].gsub(/#{arg}/, '\&'.red_on_yellow)
         end
       end
 
