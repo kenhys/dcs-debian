@@ -11,7 +11,7 @@ module Dcs
 
     class Command < Thor
 
-      desc "control [KEYWORDS]", ""
+      desc "control KEYWORD", ""
       def control(arg)
         client = Searcher.new
         client.pagination("control", arg) do |context|
@@ -22,7 +22,7 @@ module Dcs
         end
       end
 
-      desc "changelog [KEYWORDS]", ""
+      desc "changelog KEYWORD", ""
       def changelog(arg)
         client = Searcher.new
         client.pagination("changelog", arg) do |context|
@@ -33,7 +33,7 @@ module Dcs
         end
       end
 
-      desc "rules [KEYWORDS]", ""
+      desc "rules KEYWORD", ""
       def rules(arg)
         client = Searcher.new
         client.pagination("rules", arg) do |context|
