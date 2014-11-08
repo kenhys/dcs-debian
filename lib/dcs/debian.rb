@@ -26,6 +26,13 @@ module Dcs
         end
       end
 
+      desc "rules [KEYWORDS]", ""
+      def rules(arg)
+        pagination("rules", arg) do |context|
+          p context
+        end
+      end
+
     end
   end
 end
