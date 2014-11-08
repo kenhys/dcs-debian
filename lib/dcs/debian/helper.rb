@@ -42,21 +42,43 @@ module Dcs
 
       def extract_entry(node, target)
         raw = node.xpath("a/code").text
-        raw =~ /.+debian\/(.+):(.+)/
-        file = $1
-        line = $2
+        raw =~ /(.+)debian\/(.+):(.+)/
+        package = $1
+        file = $2
+        line = $3
         entry = {}
         case file
         when target
-          p file
+          entry[:path] = raw
+          entry[:package] = package
           entry[:file] = file
           entry[:line] = line
+          node.xpath("pre").each do |pre|
+            data = []
+            pre.children.each do |cnode|
+              if cnode.kind_of?(Nokogiri::XML::Element)
+                case cnode.attribute("name")
+                when "br"
+                when "strong"
+                  data << indent + cnode.text
+                end
+              else
+                data << indent + cnode.text
+              end
+            end
+            entry[:pre] = data.join("\n")
+          end
         else
           #p file
           #p line
         end
         entry
       end
+
+      def indent
+        " " * 2
+      end
+
     end
   end
 end
