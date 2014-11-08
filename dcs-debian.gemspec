@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Dcs::Debian::VERSION
   spec.authors       = ["HAYASHI Kentaro"]
   spec.email         = ["kenhys@gmail.com"]
-  spec.summary       = %q{Command line tool to search debian/ files.}
-  spec.description   = %q{Search keyword from http://codesearch.debian.net by command line.}
-  spec.homepage      = ""
+  spec.summary       = %q{Command line tool which uses Debian Code Search to search debian/ files.}
+  spec.description   = %q{Search debian/ files which contains specific keyword from Debian Code Search (http://codesearch.debian.net).}
+  spec.homepage      = "https://github.com/kenhys/dcs-debian"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
