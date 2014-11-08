@@ -16,14 +16,20 @@ module Dcs
       desc "control [KEYWORDS]", ""
       def control(arg)
         pagination("control", arg) do |context|
-          p context
+          puts sprintf("%s (%s)",
+                       context[:path].bold.white_on_green,
+                       context[:url].white_on_blue)
+          puts context[:pre].gsub(/#{arg}/, '\&'.red_on_yellow)
         end
       end
 
       desc "changelog [KEYWORDS]", ""
       def changelog(arg)
         pagination("changelog", arg) do |context|
-          p context
+          puts sprintf("%s (%s)",
+                       context[:path].bold.white_on_green,
+                       context[:url].white_on_blue)
+          puts context[:pre].gsub(/#{arg}/, '\&'.red_on_yellow)
         end
       end
 
