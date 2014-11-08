@@ -7,7 +7,6 @@ require "dcs/debian/helper"
 
 module Dcs
   module Debian
-    # Your code goes here...
 
     class Command < Thor
 
