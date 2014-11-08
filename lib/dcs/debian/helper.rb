@@ -13,7 +13,8 @@ module Dcs
                              BASE_URL, keyword, target)
         end
 
-        until next_uri.nil?
+        page = 1
+        until next_uri.nil? or page > 10
           html = open(next_uri, "r:utf-8").read
           Nokogiri.parse(html) do |doc|
             doc.xpath("//ul[@id='results']/li").each do |li|
@@ -24,6 +25,7 @@ module Dcs
             end
             next_uri = extract_next_page_uri(doc)
           end
+          page = page + 1
         end
       end
 
