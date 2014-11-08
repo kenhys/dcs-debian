@@ -44,6 +44,16 @@ module Dcs
         end
       end
 
+      def method_missing(id, *arguments)
+        client = Searcher.new
+        client.pagination(id.to_s, arguments[0]) do |context|
+          puts sprintf("%s (%s)",
+                       context[:path].bold.white_on_green,
+                       context[:url].white_on_blue)
+          puts context[:pre].gsub(/#{arguments[0]}/, '\&'.red_on_yellow)
+        end
+      end
+
     end
   end
 end
