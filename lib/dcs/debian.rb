@@ -10,20 +10,16 @@ module Dcs
 
     class Command < Thor
 
-      desc "control KEYWORD", ""
-      def control(arg)
-        dcs_search("control", arg)
+      def self.define_commands(name)
+        desc "#{name} KEYWORD", "Search debian/#{name} file"
+        define_method(name) do |*args, &block|
+          dcs_search(name, args[0])
+        end
       end
 
-      desc "changelog KEYWORD", ""
-      def changelog(arg)
-        dcs_search("changelog", arg)
-      end
-
-      desc "rules KEYWORD", ""
-      def rules(arg)
-        dcs_search("rules", arg)
-      end
+      define_commands :control
+      define_commands :rules
+      define_commands :changelog
 
       private
 
