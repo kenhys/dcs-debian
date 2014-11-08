@@ -35,7 +35,7 @@ module Dcs
 
       desc "rules [KEYWORDS]", ""
       def rules(arg)
-        client = SearchClient.new
+        client = Searcher.new
         client.pagination("rules", arg) do |context|
           puts sprintf("%s (%s)",
                        context[:path].bold.white_on_green,
