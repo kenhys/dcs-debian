@@ -14,9 +14,6 @@ module Dcs
 
       desc "control [KEYWORDS]", ""
       def control(arg)
-
-        puts arg
-
         pagination("control", arg) do |context|
           p context
         end
