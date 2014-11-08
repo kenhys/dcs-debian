@@ -1,6 +1,6 @@
-# Dcs::Debian
+# dcs-debian
 
-TODO: Write a gem description
+Dcs-debian is the command line tool which uses Debian Code Search to search debian/ files.
 
 ## Installation
 
@@ -20,11 +20,13 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+    $ dcs-debian rules groonga
+    $ dcs-debian changelog closed
+    $ dcs-debian control Standards
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/dcs-debian/fork )
+1. Fork it ( https://github.com/kenhys/dcs-debian/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
