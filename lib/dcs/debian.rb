@@ -13,7 +13,7 @@ module Dcs
       def self.define_commands(name)
         desc "#{name} KEYWORD", "Search debian/#{name} file"
         define_method(name) do |*args, &block|
-          dcs_search(name, args[0])
+          dcs_search(name.to_s, args[0])
         end
       end
 
