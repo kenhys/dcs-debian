@@ -9,9 +9,9 @@ module Dcs
       BASE_URL = "http://codesearch.debian.net"
 
       def initialize(options)
-        @page_limit = 10
-        @n_limit = 10
-        @verbose = options[:verbose] || false
+        @page_limit = options[:page_limit]
+        @n_limit = options[:n_limit]
+        @verbose = options[:verbose]
       end
 
       def pagination(target, keyword)
@@ -31,6 +31,7 @@ module Dcs
           Nokogiri.parse(html) do |doc|
             doc.xpath("//ul[@id='results']/li").each do |li|
               entry = extract_entry(li, target)
+              next if n > @n_limit
               unless entry.empty?
                 if entry[:pre].include?(keyword)
                   n = n + 1

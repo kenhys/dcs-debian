@@ -13,10 +13,14 @@ module Dcs
       attr_accessor :verbose
 
       def self.define_commands(name)
-        desc "#{name} KEYWORD", "Search debian/#{name} file"
+        desc "#{name} KEYWORD [--n_limit VAL] [--page_limit VAL]", "Search debian/#{name} file"
         option :verbose, :default => false
+        option :page_limit, :default => 1
+        option :n_limit, :default => 5
         define_method(name) do |*args, &block|
           @verbose = options[:verbose]
+          @page_limit = options[:page_limit].to_i
+          @n_limit = options[:n_limit].to_i
           dcs_search(name.to_s, args[0])
         end
       end
@@ -28,7 +32,12 @@ module Dcs
       private
 
       def dcs_search(file, keyword)
-        client = Searcher.new({:verbose => @verbose})
+        options = {
+          :verbose => @verbose,
+          :page_limit => @page_limit,
+          :n_limit => @n_limit
+        }
+        client = Searcher.new(options)
         client.pagination(file, keyword) do |context|
           puts sprintf("%s (%s)",
                        context[:path].bold.white_on_green,
