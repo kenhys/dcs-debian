@@ -21,7 +21,9 @@ module Dcs
           @verbose = options[:verbose]
           @page_limit = options[:page_limit].to_i
           @n_limit = options[:n_limit].to_i
-          dcs_search(name.to_s, args[0])
+          keyword = args[0].dup
+          keyword.capitalize! if keyword.end_with?(":")
+          dcs_search(name.to_s, keyword)
         end
       end
 
