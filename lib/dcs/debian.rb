@@ -10,9 +10,13 @@ module Dcs
 
     class Command < Thor
 
+      attr_accessor :verbose
+
       def self.define_commands(name)
         desc "#{name} KEYWORD", "Search debian/#{name} file"
+        option :verbose, :default => false
         define_method(name) do |*args, &block|
+          @verbose = options[:verbose]
           dcs_search(name.to_s, args[0])
         end
       end
@@ -24,7 +28,7 @@ module Dcs
       private
 
       def dcs_search(file, keyword)
-        client = Searcher.new
+        client = Searcher.new({:verbose => @verbose})
         client.pagination(file, keyword) do |context|
           puts sprintf("%s (%s)",
                        context[:path].bold.white_on_green,

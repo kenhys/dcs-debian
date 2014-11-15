@@ -8,9 +8,10 @@ module Dcs
 
       BASE_URL = "http://codesearch.debian.net"
 
-      def initialize
+      def initialize(options)
         @page_limit = 10
         @n_limit = 10
+        @verbose = options[:verbose] || false
       end
 
       def pagination(target, keyword)
@@ -19,7 +20,8 @@ module Dcs
         data = []
         unless next_uri
           next_uri = sprintf("%s/search?q=%s+path%%3Adebian%%2F%s%%24",
-                             BASE_URL, keyword, target)
+                             BASE_URL, URI.encode_www_form_component(keyword), target)
+          puts next_uri if @verbose
         end
 
         page = 1
@@ -37,6 +39,7 @@ module Dcs
               end
             end
             next_uri = extract_next_page_uri(doc)
+            puts next_uri if @verbose
           end
           page = page + 1
         end
