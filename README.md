@@ -12,17 +12,7 @@ Debian Code Search (http://codesearch.debian.net).
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'dcs-debian'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
+Install it yourself as:
 
     $ gem install dcs-debian
 
